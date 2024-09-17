@@ -507,6 +507,7 @@ java
     }
 </details>
 
+<details>
 <summary># Android Mediation - IronSource</summary>
 
 To integrate the Appstock SDK into your app, you should add the following dependency into the `app/build.gradle` file
