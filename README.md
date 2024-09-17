@@ -10,12 +10,12 @@ The minimum supported Android version: **Android 5.0** (API level **21**)
 
 [Demo applications (Kotlin, JAVA)](https://public-sdk.al-ad.com/android/appstock-demo/demo-app-1.0.0/).
 
-## Integration and Configuration
+## Integration and configuration
 
-<details>
-<summary>Integration and Configuration</summary>
-
-Follow the [integration instructions](sdk-android-integration.md) to add the SDK to your app. Once the SDK is integrated, you can provide [configuration options](6-sdk-android-parametrisation) that will help increase your revenue. Keep in mind that the SDK supports basic [consent providers](7-sdk-android-consents) according to industry standards.
+Follow the [integration instructions](sdk-android-integration.md) to add the SDK to your app. Once the SDK is
+integrated, you can provide [configuration options](6-sdk-android-parametrisation) that will help increase your
+revenue. Keep in mind that the SDK supports basic [consent providers](7-sdk-android-consents) according to industry
+standards.
 
 Appstock SDK supports the following ad formats:
 
@@ -27,25 +27,25 @@ The SDK can be integrated directly into your app or via supported Mediation Adap
 
 - [AppLovin MAX](9-sdk-android-applovin)
 - [GMA SDK](8-sdk-android-admob) (AdMob, GAM)
-</details>
-
-# Appstock Android SDK - Integration
-
-## Integration using Dependency
 
 <details>
-<summary>Integration using Dependency</summary>
+<summary># Appstock Android SDK - Integration
+</summary>
 
-In order to integrate Appstock SDK into your application, you should add the following dependency to the `app/build.gradle` file and sync Gradle:
+## Integration using dependency
 
-```groovy
+In order to integrate Appstock SDK into your application, you should add the following dependency to
+the `app/build.gradle` file and sync Gradle:
+
+groovy
 dependencies {
     implementation("com.appstock:appstock-sdk:1.0.0")
 }
 
+
 Add this custom maven repository URL into the `project/settings.gradle` file:
 
-```groovy
+groovy
 dependencyResolutionManagement {
     repositories {
         maven {
@@ -53,7 +53,7 @@ dependencyResolutionManagement {
         }
     }
 }
-```
+
 
 Manual integration using AAR files
 
@@ -65,7 +65,7 @@ Copy AAR files to your Android module libs folder (f.e. app/libs/).
 - [AppLovin adapters](https://public-sdk.al-ad.com/android/com/appstock/appstock-sdk-applovin-adapters/1.0.0/appstock-sdk-applovin-adapters-1.0.0.aar)
 
 Add dependencies to build.gradle file.
-```groovy
+groovy
 implementation(files("libs/core-release.aar"))
 implementation(files("libs/omsdk.aar"))
 
@@ -74,10 +74,10 @@ implementation(files("libs/admob-adapters-release.aar"))
 
 // Only for AppLovin integration
 implementation(files("libs/applovin-adapters-release.aar"))
-```
+
 
 Integration using ARR files requires additional dependencies.  You should add ExoPlayer dependency for video ads and Google ads identifier dependency for better targeting.
-```groovy
+groovy
 
 implementation 'com.google.android.exoplayer:exoplayer-core:2.15.1'
 implementation 'com.google.android.exoplayer:exoplayer-ui:2.15.1'
@@ -86,27 +86,30 @@ implementation 'com.google.android.gms:play-services-base:18.1.0'
 implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
 
 implementation "androidx.localbroadcastmanager:localbroadcastmanager:1.0.0"
-```
 
+</details>
 
-## Initialization
+<details>
+<summary>## Initialization
+</summary>
+
 
 Import the Appstock SDK core class in the main application class:
 
 Kotlin:
-```kotlin
+kotlin
 import com.appstock.sdk.api.Appstock
-```
+
 
 Java:
-```java
+java
 import com.appstock.sdk.api.Appstock;
-```
+
 
 Initialize Appstock SDK in the  `.onCreate()` method by calling `Appstock.initializeSdk()`.
 
 Kotlin: 
-```kotlin
+kotlin
 class DemoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -115,10 +118,10 @@ class DemoApplication : Application() {
         Appstock.initializeSdk(this, PARTNER_KEY)
     }
 }
-```
+
 
 Java: 
-```java
+java
 public class DemoApplication extends Application {
     @Override
     public void onCreate() {
@@ -128,7 +131,7 @@ public class DemoApplication extends Application {
         Appstock.initializeSdk(this, PARTNER_KEY);
     }
 }
-```
+
 
 The `Appstock.initializeSdk()` method has two parameters:
 
@@ -144,26 +147,29 @@ Once SDK is initialized and all needed parameters are provided, it is ready to r
 If you want to see all requests made by the SDK and verbose logs, you should enable debug mode before the initialization. 
 
 Kotlin:
-```kotlin
+kotlin
 Appstock.setDebugRequests(true)
 Appstock.setLogLevel(Appstock.LogLevel.DEBUG)
 Appstock.initializeSdk(this, PARTNER_KEY)
-```
+
 
 Java:
-```java
+java
 Appstock.setDebugRequests(true);
 Appstock.setLogLevel(Appstock.LogLevel.DEBUG);
 Appstock.initializeSdk(this, PARTNER_KEY);
-```
+</details>
 
-# Appstock Android SDK - Banner
+<details>
+<summary># Appstock Android SDK - Banner
+</summary>
+
 
 To load and show banner ads, you should initialize, configure, and add the `AppstockAdView` object to the app's layout and call the `loadAd()` method.
 
 Kotlin:
 
-```kotlin
+kotlin
 private var adView: AppstockAdView? = null
 
 private fun createAd() {
@@ -182,10 +188,10 @@ private fun createAd() {
     // 4. Add AppstockAdView to the app UI
     containerForAd.addView(adView)
 }
-```
+
 
 Java:
-```java
+java
 private AppstockAdView adView;
 
 private void createAd() {
@@ -204,7 +210,7 @@ private void createAd() {
     // 4. Add AppstockAdView to the app UI
     getContainerForAd().addView(adView);
 }
-```
+
 
 The `AppstockAdView` should be provided with one of the required configuration properties:
 
@@ -218,14 +224,14 @@ Which one to use depends on your type of Appstock account.
 It's important to destroy ad view after leaving the screen. It cleans the resources and stops auto refresh. Or you can just stop auto refresh using `stopAutoRefresh()`.
 
 Kotlin:
-```kotlin
+kotlin
 override fun onDestroy() {
     adView?.destroy()
 }
-```
+
 
 Java:
-```java
+java
 @Override
 public void onDestroy() {
     super.onDestroy();
@@ -233,40 +239,40 @@ public void onDestroy() {
         adView.destroy();
     }
 }
-```
+
 
 If you need to integrate video ads, you can also use the `AppstockAdView` object in the same way as for banner ads. The single required change is you should explicitly set the ad format via the respective property:
 
 Kotlin:
-```kotlin
+kotlin
 adView.setAdUnitFormat(AppstockAdUnitFormat.VIDEO)
-```
+
 
 Java:
-```java
+java
 adView.setAdUnitFormat(AppstockAdUnitFormat.VIDEO);
-```
+
 
 Once it is done, the Appstock SDK will make ad requests for video placement and render the respective creatives.
 
 Additionally, you can set more parameters for better advertisement targeting.
 
 Kotlin:
-```kotlin
+kotlin
 adView.setAdPosition(AppstockBannerAdPosition.HEADER)
 adView.setVideoPlacementType(AppstockVideoPlacementType.IN_BANNER) // Only for video ad unit format
-```
+
 
 Java:
-```java
+java
 adView.setAdPosition(AppstockBannerAdPosition.HEADER);
 adView.setVideoPlacementType(AppstockVideoPlacementType.IN_BANNER); // Only for video ad unit format
-```
+
 
 You can optionally subscribe to the ad’s lifecycle events by implementing the `AppstockAdViewListener` interface:
 
 Kotlin:
-```kotlin
+kotlin
 private fun createListener(): AppstockAdViewListener {
     return object : AppstockAdViewListener {
         override fun onAdLoaded(adView: AppstockAdView) {
@@ -292,10 +298,10 @@ private fun createListener(): AppstockAdViewListener {
         }
     }
 }
-```
+
 
 Java:
-```java
+java
 private static AppstockAdViewListener createListener() {
     return new AppstockAdViewListener() {
         @Override
@@ -326,12 +332,12 @@ private static AppstockAdViewListener createListener() {
         }
     };
 }
-```
+
 
 Or you can subscribe to the video ad events (only for video ad unit format).
 
 Kotlin:
-```kotlin
+kotlin
 private fun createListener(): AppstockAdViewVideoListener {
     return object : AppstockAdViewVideoListener {
         override fun onVideoCompleted(bannerView: AppstockAdView?) {
@@ -356,10 +362,10 @@ private fun createListener(): AppstockAdViewVideoListener {
 
     }
 }
-```
+
 
 Java:
-```java
+java
 private static AppstockAdViewVideoListener createListener() {
     return new AppstockAdViewVideoListener() {
 
@@ -389,15 +395,18 @@ private static AppstockAdViewVideoListener createListener() {
         }
     };
 }
-```
 
+</details>
 
-# Appstock Android SDK - Interstitial
+<details>
+<summary># Appstock Android SDK - Interstitial
+</summary>
+
 
 To load and show interstitial ads, you should initialize, configure, and add the `AppstockInterstitialAdUnit` object to the app's layout and call the `loadAd()` method. Once the ad is loaded, you can invoke the `show()` method at any appropriate point of the app flow to present the fullscreen ad.
 
 Kotlin:
-```kotlin
+kotlin
 private var adUnit: AppstockInterstitialAdUnit? = null
 
 private fun createAd() {
@@ -412,10 +421,10 @@ private fun createAd() {
     // 3. Load ad
     adUnit?.loadAd()
 }
-```
+
 
 Java:
-```java
+java
 private AppstockInterstitialAdUnit adUnit;
 
 private void createAd() {
@@ -429,7 +438,7 @@ private void createAd() {
     // 3. Load ad
     adUnit.loadAd();
 }
-```
+
 
 If you need to integrate **video** ads or **multiformat** ads, you should set the `adFormats` property to the respective value:        
 
@@ -438,14 +447,14 @@ If you need to integrate **video** ads or **multiformat** ads, you should set th
 It's important to destroy ad unit after leaving the screen. It cleans the resources and stops auto refresh.
 
 Kotlin:
-```kotlin
+kotlin
 override fun onDestroy() {
     adUnit?.destroy()
 }
-```
+
 
 Java:
-```java
+java
 @Override
 public void onDestroy() {
     super.onDestroy();
@@ -453,12 +462,12 @@ public void onDestroy() {
         adUnit.destroy();
     }
 }
-```
+
 
 If you need to integrate video ads or multiformat ads, you should set the adFormats property to the respective value:
 
 Kotlin:
-```kotlin
+kotlin
 // Make ad request for video ad
 adUnit.setAdUnitFormats(EnumSet.of(AppstockAdUnitFormat.VIDEO))
 
@@ -467,10 +476,10 @@ adUnit.setAdUnitFormats(EnumSet.of(AppstockAdUnitFormat.BANNER, AppstockAdUnitFo
 
 // Make ad request for banner ad
 adUnit.setAdUnitFormats(EnumSet.of(AppstockAdUnitFormat.BANNER))
-```
+
 
 Java:
-```java
+java
 // Make ad request for video ad
 adUnit.setAdUnitFormats(EnumSet.of(AppstockAdUnitFormat.VIDEO));
 
@@ -479,14 +488,14 @@ adUnit.setAdUnitFormats(EnumSet.of(AppstockAdUnitFormat.BANNER, AppstockAdUnitFo
 
 // Make ad request for banner ad
 adUnit.setAdUnitFormats(EnumSet.of(AppstockAdUnitFormat.BANNER));
-```
+
 
 Once the ad is loaded, you can invoke the `show()` method at any appropriate point of the app flow to present the full-screen ad. To know when the ad is loaded, you should implement `AppstockInterstitialAdUnitListener` interface and subscribe to the ad events in its methods.
 
 When the delegate’s method `onAdLoaded` is called, it means that the SDK has successfully loaded the ad. Starting from this point, you can call the `show()` method to display the full-screen ad.
 
 Kotlin:
-```kotlin
+kotlin
 private fun createListener(): AppstockInterstitialAdUnitListener {
     return object : AppstockInterstitialAdUnitListener {
         override fun onAdLoaded(adUnit: AppstockInterstitialAdUnit) {
@@ -519,10 +528,10 @@ private fun createListener(): AppstockInterstitialAdUnitListener {
         }
     }
 }
-```
+
 
 Java:
-```java
+java
 private static AppstockInterstitialAdUnitListener createListener() {
     return new AppstockInterstitialAdUnitListener() {
         @Override
@@ -557,7 +566,7 @@ private static AppstockInterstitialAdUnitListener createListener() {
         }
     };
 }
-```
+
 
 ### Rendering Controls
 
@@ -577,7 +586,7 @@ The following properties enable rendering customization of video interstitial ad
 Usage examples:
 
 Kotlin:
-```kotlin
+kotlin
 adUnit.setSkipDelay(10)
 adUnit.setSkipButtonPosition(AppstockPosition.TOP_RIGHT)
 adUnit.setSkipButtonArea(0.2) 
@@ -587,10 +596,10 @@ adUnit.setCloseButtonArea(0.2)
 
 adUnit.setIsMuted(true) 
 adUnit.setIsSoundButtonVisible(true)
-```
+
 
 Java:
-```java
+java
 adUnit.setSkipDelay(10);
 adUnit.setSkipButtonPosition(AppstockPosition.TOP_RIGHT);
 adUnit.setSkipButtonArea(0.2);
@@ -600,15 +609,17 @@ adUnit.setCloseButtonArea(0.2);
 
 adUnit.setIsMuted(true); 
 adUnit.setIsSoundButtonVisible(true);
-```
+</details>
 
-# Appstock Android SDK - Native
+<details>
+<summary># Appstock Android SDK - Native</summary>
+
 
 To load a native ad, you should initialize and configure `AppstockNativeAdUnit` object and call the `loadAd()` method.
 
 Kotlin:
 
-```kotlin
+kotlin
 private var adUnit: AppstockNativeAdUnit? = null
 
 private fun createAd() {
@@ -688,11 +699,11 @@ private fun createNativeConfig(): AppstockNativeAdConfig {
         .setNativeAssets(assets)
         .build()
 }
-```
+
 
 Java:
 
-```java
+java
 private AppstockNativeAdUnit adUnit;
 
 private void createAd() {
@@ -772,7 +783,7 @@ private AppstockNativeAdConfig createNativeConfig() {
             .setNativeAssets(assets)
             .build();
 }
-```
+
 
 ## AppstockNativeAdConfig
 
@@ -820,19 +831,19 @@ Request asset for the advertisement title. Parameters:
 
 Kotlin:
 
-```kotlin
+kotlin
     val title = NativeTitleAsset()
     title.setLength(90)
     title.isRequired = true
-```
+
 
 Java:
 
-```java
+java
     NativeTitleAsset title = new NativeTitleAsset();
     title.setLength(90);
     title.setRequired(true);
-```
+
 
 
 ### NativeDataAsset
@@ -846,21 +857,21 @@ Request asset for any text data. Parameters:
 
 Kotlin:
 
-```kotlin
+kotlin
     val sponsored = NativeDataAsset()
     sponsored.len = 90
     sponsored.dataType = NativeDataAsset.DataType.SPONSORED
     sponsored.isRequired = true
-```
+
 
 Java:
 
-```java
+java
     NativeDataAsset sponsored = new NativeDataAsset();
     sponsored.setLen(90);
     sponsored.setDataType(NativeDataAsset.DataType.SPONSORED);
     sponsored.setRequired(true);
-```
+
 
 Available data types:
 
@@ -892,21 +903,21 @@ Request asset for image. In the example below we request ad with desired size 20
 
 Kotlin:
 
-```kotlin
+kotlin
     val mainImage = NativeImageAsset(200, 200, 30, 30)
     mainImage.imageType = NativeImageAsset.ImageType.MAIN
     mainImage.isRequired = true
     mainImage.addMime("image/jpeg")
-```
+
 
 Java:
 
-```java
+java
     NativeImageAsset mainImage = new NativeImageAsset(200, 200, 200, 200);
     mainImage.setImageType(NativeImageAsset.ImageType.MAIN);
     mainImage.setRequired(true);
     mainImage.addMime("image/jpeg")
-```
+
 
 Available data types:
 
@@ -920,7 +931,7 @@ Available data types:
 You can also specify what type of event tracking is supported. For that you need to set `setEventTrackers` setter.
 
 Kotlin:
-```kotlin
+kotlin
     val eventTrackingMethods = ArrayList(
         Arrays.asList(
             NativeEventTracker.EventTrackingMethod.IMAGE,
@@ -931,10 +942,10 @@ Kotlin:
         NativeEventTracker.EventType.IMPRESSION,
         eventTrackingMethods
     )
-```
+
 
 Java:
-```java
+java
     ArrayList<NativeEventTracker.EventTrackingMethod> eventTrackingMethods = new ArrayList<>(
             Arrays.asList(
                     NativeEventTracker.EventTrackingMethod.IMAGE,
@@ -945,7 +956,7 @@ Java:
             NativeEventTracker.EventType.IMPRESSION,
             eventTrackingMethods
     );
-```
+
 
 The event method configures desired tracking method:
 - `Impression` - represents an impression event.                                                                   
@@ -966,7 +977,7 @@ Once the ad is loaded, the SDK provides you with a `AppstockNativeAd` object in 
 
 Kotlin:
 
-```kotlin
+kotlin
 private fun createNativeView(ad: AppstockNativeAd) {
     val nativeContainer = View.inflate(this, R.layout.layout_native, null)
 
@@ -989,11 +1000,11 @@ private fun createNativeView(ad: AppstockNativeAd) {
 
     ad.registerView(nativeContainer, Lists.newArrayList(icon, title, image, description, cta), createListener())
 }
-```
+
 
 Java:
 
-```java
+java
 private void createNativeView(AppstockNativeAd ad) {
     View nativeContainer = View.inflate(this, R.layout.layout_native, null);
 
@@ -1015,13 +1026,13 @@ private void createNativeView(AppstockNativeAd ad) {
 
     ad.registerView(nativeContainer, Arrays.asList(icon, title, image, description, cta), createListener());
 }
-```
+
 
 If you need to manage stages of the ad lifecycle you should implement the `AppstockNativeAdUnitEventListener` interface.
 
 Kotlin:
 
-```kotlin
+kotlin
 private fun createListener(): AppstockNativeAdUnitEventListener {
     return object : AppstockNativeAdUnitEventListener {
         override fun onAdImpression() {
@@ -1040,11 +1051,11 @@ private fun createListener(): AppstockNativeAdUnitEventListener {
         }
     }
 }
-```
+
 
 Java:
 
-```java
+java
 private static AppstockNativeAdUnitEventListener createListener() {
     return new AppstockNativeAdUnitEventListener() {
         @Override
@@ -1066,10 +1077,13 @@ private static AppstockNativeAdUnitEventListener createListener() {
         }
     };
 }
-```
 
+</details>
 
-# Appstock Android SDK - Parametrisation
+<details>
+<summary># Appstock Android SDK - Parametrisation
+</summary>
+
 
 ## Configuration via `AppstockTargeting` class
 
@@ -1089,7 +1103,7 @@ The `AppstockTargeting` class provided a set of properties that allow to enrich 
 Usage examples:
 
 Kotlin:
-```kotlin
+kotlin
     AppstockTargeting.setPublisherName("appstock")
     AppstockTargeting.setDomain("appstock.com")
     AppstockTargeting.setStoreUrl("https://google.play.url")
@@ -1099,10 +1113,10 @@ Kotlin:
     AppstockTargeting.setUserKeywords(setOf("cats", "hobby", "sport"))
     AppstockTargeting.setUserCustomData("custom")
     Appstock.initializeSdk(context, PARTNER_KEY)
-```
+
 
 Java:
-```java
+java
     AppstockTargeting.setPublisherName("appstock");
     AppstockTargeting.setDomain("appstock.com");
     AppstockTargeting.setStoreUrl("https://google.play.url");
@@ -1120,7 +1134,7 @@ Java:
     AppstockTargeting.setUserKeywords(keywords);
     
     Appstock.initializeSdk(context, PARTNER_KEY);
-```
+
 
 ## Configuration via `Appstock` class
 
@@ -1137,7 +1151,7 @@ Public methods:
 - `setCreativeFactoryTimeoutPreRenderContent` - timeout for parsing and render video ads content (default: 30000).
 
 Kotlin:
-```kotlin
+kotlin
     Appstock.setEndpointId("endpoint_id")
     Appstock.getAssignNativeAssetId(true)
     Appstock.setDebugRequests(true)
@@ -1153,10 +1167,10 @@ Kotlin:
     Appstock.setExternalUserIds(List.of(externalUserId))
     
     Appstock.initializeSdk(this, PARTNER_KEY)
-```
+
 
 Java:
-```java
+java
     Appstock.setEndpointId(ENDPOINT_ID);
     Appstock.getAssignNativeAssetId(true);
     Appstock.setDebugRequests(true);
@@ -1172,7 +1186,7 @@ Java:
     Appstock.setExternalUserIds(List.of(externalUserId));
     
     Appstock.initializeSdk(this, PARTNER_KEY);
-```
+
 # Appstock Android SDK - Consent Management
 
 Appstock SDK reads consent data provided by CMPs from User Settings and sends it in the ad request. You shouldn’t do
@@ -1193,501 +1207,6 @@ The following table describes which data is used by SDK and how exactly:
 | `IABGPP_HDR_GppString`                                                                                                                                       | Full consent string in its encoded form                                                                                                                                                                          | `regs.gpp`                                         |
 | `IABGPP_GppSID`                                                                                                                                              | Section ID(s) considered to be in force. Multiple IDs are separated by underscore, e.g. “2_3”                                                                                                                    | `regs.gpp_sid`                                     |
 
-# Android Mediation - AdMob
+</details>
 
-To integrate the Appstock SDK into your app, you should add the following dependency into the `app/build.gradle` file and sync Gradle:
 
-```groovy
-dependencies {
-  implementation("com.appstock:appstock-sdk:1.0.0")
-  implementation("com.appstock:appstock-sdk-google-mobile-ads-adapters:1.0.0")
-}
-```
-
-Add this custom maven repository URL into the `project/settings.gradle` file:
-
-```groovy
-dependencyResolutionManagement {
-    repositories {
-        maven {
-            setUrl("https://public-sdk.al-ad.com/android/")
-        }
-    }
-}
-```
-
-Initialize Appstock SDK in the  `.onCreate()` method by calling `Appstock.initializeSdk()`.
-
-Kotlin:
-```kotlin
-class DemoApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        // Initialize Appstock SDK
-        Appstock.initializeSdk(this, PARTNER_KEY)
-    }
-}
-```
-
-Java:
-```java
-public class DemoApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        // Initialize Appstock SDK
-        Appstock.initializeSdk(this, PARTNER_KEY);
-    }
-}
-```
-
-In order to add Appstock to the waterfall, you need to create a custom event in your AdMob account and then add this event to the respective mediation groups.
-
-To create a Appstock custom event, follow the instructions:
-
-1. Sign in to your [AdMob account](https://apps.admob.com).
-2. Click **Mediation** in the sidebar.
-
-<img src="images/AdMob_2.png">
-
-3. Click the **Waterfall sources** tab.
-
-<img src="images/AdMob_3.png">
-
-4. Click **Custom Event**.
-
-<img src="images/AdMob_4.png">
-
-5. Find your app in the list and сlick **Manage mappings**.
-
-<img src="images/AdMob_5.png">
-
-6. Click **Add mapping**. To include multiple custom events, you’ll need to set up [additional mappings](https://support.google.com/admob/answer/13395411#manage).
-
-<img src="images/AdMob_7.png">
-
-7. Add the mapping details, including a mapping name. Enter a class name (required) and a parameter (optional) for each ad unit. Typically, the optional parameter contains a JSON that contains IDs (placement ID, endpoint ID) that will be used by the custom event to load ads.
-
-Parameters:
-
-- **placement_id** - unique identifier generated on the platform's UI.
-- **endpoint_id** - unique identifier generated on the platform's UI.
-
-Example:
-```json
-{
-  "placement_id": "5"
-}
-```
-
-Class Name: **com.appstock.sdk.admob.AppstockGadMediationAdapter**
-
-<img src="images/AdMob_8.png">
-
-8. Click **Save**.
-
-After you’ve finished setting up your custom event, you’re ready to add it to a mediation group. To add your ad source to an existing mediation group:
-
-1. Sign in to your [AdMob account](https://apps.admob.com).
-2. Click **Mediation** in the sidebar.
-
-<img src="images/AdMob_2.png">
-
-3. In the **Mediation group** tab, click the name of the mediation group to which you're adding the ad source.
-
-<img src="images/AdMob_Mediation_3.png">
-
-4. In the Waterfall ad sources table, click **Add custom event**.
-
-<img src="images/AdMob_Mediation_4.png">
-
-5. Enter a descriptive label for the event. Enter a manual eCPM to use for this custom event. The eCPM will be used to dynamically position the event in the mediation waterfall where it will compete with other ad sources to fill ad requests.
-
-<img src="images/AdMob_Mediation_5.png">
-
-6. Click **Continue**.
-
-7. Select an existing mapping to use for this custom event or click **Add mapping** to set up a new mapping. To use multiple custom events, you’ll have to create an additional mapping for each custom event.
-
-<img src="images/AdMob_Mediation_7.png">
-
-8. Click **Done**.
-
-<img src="images/AdMob_Mediation_8.png">
-
-9. Click **Save**. The mediation group will be saved.
-
-<img src="images/AdMob_Mediation_9.png">
-
-
-# Android Mediation - AppLovin
-
-To integrate the Appstock SDK into your app, you should add the following dependency into the `app/build.gradle` file
-and sync Gradle:
-
-```groovy
-dependencies {
-    implementation("com.appstock:appstock-sdk:1.0.0")
-    implementation("com.appstock:appstock-sdk-applovin-adapters:1.0.0")
-}
-```
-
-Add this custom maven repository URL into the `project/settings.gradle` file:
-
-```groovy
-dependencyResolutionManagement {
-    repositories {
-        maven {
-            setUrl("https://public-sdk.al-ad.com/android/")
-        }
-    }
-}
-```
-
-Initialize Appstock SDK in the  `.onCreate()` method by calling `Appstock.initializeSdk()`.
-
-Kotlin:
-```kotlin
-class DemoApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        // Initialize Appstock SDK
-        Appstock.initializeSdk(this, PARTNER_KEY)
-    }
-}
-```
-
-Java:
-```java
-public class DemoApplication extends Application {
-   @Override
-   public void onCreate() {
-      super.onCreate();
-
-      // Initialize Appstock SDK
-      Appstock.initializeSdk(this, PARTNER_KEY);
-   }
-}
-```
-
-To integrate the Appstock into your AppLovin monetization stack, you should enable a Appstock SDK ad network and add it
-to the respective ad units.
-
-1. In the MAX Dashboard, select [MAX > Mediation > Manage > Networks](https://dash.applovin.com/o/mediation/networks/).
-
-<img src="images/MAX_1.png">
-
-2. Click **Click here to add a Custom Network** at the bottom of the page. The **Create Custom Network** page appears.
-
-<img src="images/MAX_2.png">
-
-3. Add the information about your custom network:
-
-   Network Type : **Choose SDK**.
-
-   Name : **Appstock**.
-
-   Android Adapter Class Name: `com.applovin.mediation.adapters.AppstockAppLovinMediationAdapter`
-
-<img src="images/MAX_3.png">
-
-4. Open [MAX > Mediation > Manage > Ad Units](https://dash.applovin.com/o/mediation/ad_units/) in the MAX dashboard.
-
-<img src="images/MAX_4.png">
-
-5. Select an ad unit for which you want to add the custom SDK network that you created in the previous step.
-
-<img src="images/MAX_5.png">
-
-6. Select which custom network you want to enable and enter the information for each placement. Refer to the network documentation to see what values you need to set for the **App ID**, **Placement ID**, and **Custom Parameters**.
-
-<img src="images/MAX_6.png">
-
-Typically, the custom parameters field should contain a JSON that contains IDs (placement ID, endpoint ID) that will be used to load ads.
-
-Parameters:
-
-- placement_id - unique identifier generated on the platform's UI.
-
-- endpoint_id - unique identifier generated on the platform's UI.
-
-Example: 
-
-```json
-{
-   "placement_id": "5"
-}
-```
-# Android Mediation - TopOn
-
-To integrate the Appstock SDK into your app, you should add the following dependency into the `app/build.gradle` file
-and sync Gradle:
-
-```groovy
-dependencies {
-    implementation("com.appstock:appstock-sdk:1.0.1")
-    implementation("com.appstock:appstock-sdk-topon-adapters:1.0.1")
-}
-```
-
-Add this custom maven repository URL into the `project/settings.gradle` file:
-
-```groovy
-dependencyResolutionManagement {
-    repositories {
-        maven {
-            setUrl("https://public-sdk.al-ad.com/android/")
-        }
-    }
-}
-```
-
-Initialize Appstock SDK in the  `.onCreate()` method by calling `Appstock.initializeSdk()`.
-
-Kotlin:
-
-```kotlin
-class DemoApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        // Initialize Appstock SDK
-        Appstock.initializeSdk(this, PARTNER_KEY)
-    }
-}
-```
-
-Java:
-
-```java
-public class DemoApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        // Initialize Appstock SDK
-        Appstock.initializeSdk(this, PARTNER_KEY);
-    }
-}
-```
-
-In order to add Appstock to the waterfall, you need to create a custom mediation network in your TopOn account and then
-add this ad source to the desired placement.
-
-To create the Appstock ad source, follow the instructions:
-
-1. Sign in to your [TopOn account](https://www.toponad.com/en).
-2. Click **Network** in the sidebar and click **Add custom network firm**.
-3. Fill the required fields. For **Adapter class name** use these values:
-
-- Banner - **com.appstock.sdk.topon.AppstockBannerAdapter**
-- Interstitial - **com.appstock.sdk.topon.AppstockInterstitialAdapter**
-- Native - **com.appstock.sdk.topon.AppstockNativeAdapter**
-
-<img src="images/topon_1.png"/>
-
-4. Click **Confirm**.
-5. Go to **Mediation** page in the sidebar.
-6. Select your app and placement id and click **Add ad source**.
-7. Fill the required fields. It's important to set **Price** and **Other Parameters** (placement or endpoint id).
-
-Fields for **Other Parameters**:
-
-- **placement_id** - unique identifier generated on the platform's UI.
-- **endpoint_id** - unique identifier generated on the platform's UI.
-
-Example:
-
-```json
-{
-  "placement_id": "5"
-}
-```
-
-<img src="images/topon_2.png"/>
-
-8. Click **Confirm**. 
-
-
-### Banner ad type
-
-For the banner ad type it's important to set the size of TopOn banner based on screen size and the standardized ad size for Appstock banner (f.e. 320x50, 300x250, 728x90).
-
-```kotlin
-    val width = 320
-    val height = 50
-    val adView = ATBannerView(this)
-
-    val localExtras = HashMap<String, Any>()
-    localExtras[ATAdConst.KEY.AD_WIDTH] = resources.displayMetrics.widthPixels
-    localExtras[ATAdConst.KEY.AD_HEIGHT] = height * resources.displayMetrics.density
-    localExtras[AppstockBannerAdapter.KEY_WIDTH] = width
-    localExtras[AppstockBannerAdapter.KEY_HEIGHT] = height
-    adView.setLocalExtra(localExtras)
-```
-
-```java
-    int width = 320;
-    int height = 50;
-    ATBannerView adView = new ATBannerView(this);
-
-    HashMap<String, Object> localExtras = new HashMap<>();
-    localExtras.put(ATAdConst.KEY.AD_WIDTH, getResources().getDisplayMetrics().widthPixels);
-    localExtras.put(ATAdConst.KEY.AD_HEIGHT, height * getResources().getDisplayMetrics().density);
-    localExtras.put(AppstockBannerAdapter.KEY_WIDTH, width);
-    localExtras.put(AppstockBannerAdapter.KEY_HEIGHT, height);
-    adView.setLocalExtra(localExtras);
-```
-
-### Interstitial ad type
-
-The interstitial ad type doesn't require any additional setup in code. You just have to add the Appstock mediation for the interstitial ad unit in the TopOn server.   
-
-### Native ad type
-
-For the native ad unit it's important to add native assets.
-
-```kotlin
-    private fun createAd() {
-        // 1. Create ad unit
-        val adUnit = ATNative(this, AD_UNIT_ID, createListener()).also { adUnit = it }
-
-        // 2. Configure ad unit with native config
-        val localExtras = HashMap<String, Any>()
-        localExtras[AppstockNativeAdConfig.KEY_EXTRAS] = createNativeConfig()
-        adUnit.setLocalExtra(localExtras)
-
-        // 3. Load ad
-        adUnit.makeAdRequest()
-    }
-
-    private fun createNativeConfig(): AppstockNativeAdConfig {
-        val eventTrackingMethods = ArrayList(
-            Arrays.asList(
-                NativeEventTracker.EventTrackingMethod.IMAGE,
-                NativeEventTracker.EventTrackingMethod.JS
-            )
-        )
-        val eventTracker = NativeEventTracker(
-            NativeEventTracker.EventType.IMPRESSION,
-            eventTrackingMethods
-        )
-
-        val title = NativeTitleAsset()
-        title.setLength(90)
-        title.isRequired = true
-
-        val icon = NativeImageAsset(20, 20, 20, 20)
-        icon.imageType = NativeImageAsset.ImageType.ICON
-        icon.isRequired = true
-
-        val mainImage = NativeImageAsset(200, 200, 200, 200)
-        mainImage.imageType = NativeImageAsset.ImageType.MAIN
-        mainImage.isRequired = true
-
-        val sponsored = NativeDataAsset()
-        sponsored.len = 90
-        sponsored.dataType = NativeDataAsset.DataType.SPONSORED
-        sponsored.isRequired = true
-
-
-        val description = NativeDataAsset()
-        description.dataType = NativeDataAsset.DataType.DESC
-        description.isRequired = true
-
-        val ctaText = NativeDataAsset()
-        ctaText.dataType = NativeDataAsset.DataType.CTATEXT
-        ctaText.isRequired = true
-
-        val assets = Arrays.asList(
-            title,
-            icon,
-            mainImage,
-            sponsored,
-            description,
-            ctaText
-        )
-
-        return AppstockNativeAdConfig.Builder()
-            .setContextType(NativeContextType.SOCIAL_CENTRIC)
-            .setPlacementType(NativePlacementType.CONTENT_FEED)
-            .setContextSubType(NativeContextSubtype.GENERAL_SOCIAL)
-            .setNativeEventTrackers(listOf(eventTracker))
-            .setNativeAssets(assets)
-            .build()
-    }
-```
-
-```java
-    private void createAd() {
-        // 1. Create ad unit
-        adUnit = new ATNative(this, AD_UNIT_ID, createListener());
-
-        // 2. Configure ad unit with native config
-        HashMap<String, Object> localExtras = new HashMap<>();
-        localExtras.put(AppstockNativeAdConfig.KEY_EXTRAS, createNativeConfig());
-        adUnit.setLocalExtra(localExtras);
-
-        // 3. Load ad
-        adUnit.makeAdRequest();
-    }
-
-    private AppstockNativeAdConfig createNativeConfig() {
-        ArrayList<NativeEventTracker.EventTrackingMethod> eventTrackingMethods = new ArrayList<>(
-                Arrays.asList(
-                        NativeEventTracker.EventTrackingMethod.IMAGE,
-                        NativeEventTracker.EventTrackingMethod.JS
-                )
-        );
-        NativeEventTracker eventTracker = new NativeEventTracker(
-                NativeEventTracker.EventType.IMPRESSION,
-                eventTrackingMethods
-        );
-
-        NativeTitleAsset title = new NativeTitleAsset();
-        title.setLength(90);
-        title.setRequired(true);
-
-        NativeImageAsset icon = new NativeImageAsset(20, 20, 20, 20);
-        icon.setImageType(NativeImageAsset.ImageType.ICON);
-        icon.setRequired(true);
-
-        NativeImageAsset mainImage = new NativeImageAsset(200, 200, 200, 200);
-        mainImage.setImageType(NativeImageAsset.ImageType.MAIN);
-        mainImage.setRequired(true);
-
-        NativeDataAsset sponsored = new NativeDataAsset();
-        sponsored.setLen(90);
-        sponsored.setDataType(NativeDataAsset.DataType.SPONSORED);
-        sponsored.setRequired(true);
-
-
-        NativeDataAsset description = new NativeDataAsset();
-        description.setDataType(NativeDataAsset.DataType.DESC);
-        description.setRequired(true);
-
-        NativeDataAsset ctaText = new NativeDataAsset();
-        ctaText.setDataType(NativeDataAsset.DataType.CTATEXT);
-        ctaText.setRequired(true);
-
-        List<NativeAsset> assets = Arrays.asList(
-                title,
-                icon,
-                mainImage,
-                sponsored,
-                description,
-                ctaText
-        );
-
-        return new AppstockNativeAdConfig.Builder()
-                .setContextType(NativeContextType.SOCIAL_CENTRIC)
-                .setPlacementType(NativePlacementType.CONTENT_FEED)
-                .setContextSubType(NativeContextSubtype.GENERAL_SOCIAL)
-                .setNativeEventTrackers(Collections.singletonList(eventTracker))
-                .setNativeAssets(assets)
-                .build();
-    }
-```
