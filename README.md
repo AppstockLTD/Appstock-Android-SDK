@@ -27,8 +27,8 @@ The SDK can be integrated directly into your app or via supported Mediation Adap
 
 - [AppLovin MAX](https://github.com/AppstockLTD/Appstock-Android-SDK/blob/main/MEDIATION.md)
 - [GMA SDK](https://github.com/AppstockLTD/Appstock-Android-SDK/blob/main/MEDIATION.md) (AdMob, GAM)
-- [TopOn](https://github.com/AppstockLTD/Appstock-Android-SDK/blob/main/MEDIATION.md) (AdMob, GAM)
-- [IronSource / LevelPlay](https://github.com/AppstockLTD/Appstock-Android-SDK/blob/main/MEDIATION.md) (AdMob, GAM)
+- [TopOn](https://github.com/AppstockLTD/Appstock-Android-SDK/blob/main/MEDIATION.md) 
+- [IronSource / LevelPlay](https://github.com/AppstockLTD/Appstock-Android-SDK/blob/main/MEDIATION.md) 
 
 <details>
 <summary># Appstock Android SDK - Integration
