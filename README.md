@@ -10,12 +10,12 @@ The minimum supported Android version: **Android 5.0** (API level **21**)
 
 [Demo applications (Kotlin, JAVA)](https://public-sdk.al-ad.com/android/appstock-demo/demo-app-1.0.0/).
 
-## Integration and configuration
+## Integration and Configuration
 
-Follow the [integration instructions](sdk-android-integration.md) to add the SDK to your app. Once the SDK is
-integrated, you can provide [configuration options](6-sdk-android-parametrisation) that will help increase your
-revenue. Keep in mind that the SDK supports basic [consent providers](7-sdk-android-consents) according to industry
-standards.
+<details>
+<summary>Integration and Configuration</summary>
+
+Follow the [integration instructions](sdk-android-integration.md) to add the SDK to your app. Once the SDK is integrated, you can provide [configuration options](6-sdk-android-parametrisation) that will help increase your revenue. Keep in mind that the SDK supports basic [consent providers](7-sdk-android-consents) according to industry standards.
 
 Appstock SDK supports the following ad formats:
 
@@ -27,19 +27,21 @@ The SDK can be integrated directly into your app or via supported Mediation Adap
 
 - [AppLovin MAX](9-sdk-android-applovin)
 - [GMA SDK](8-sdk-android-admob) (AdMob, GAM)
+</details>
 
 # Appstock Android SDK - Integration
 
-## Integration using dependency
+## Integration using Dependency
 
-In order to integrate Appstock SDK into your application, you should add the following dependency to
-the `app/build.gradle` file and sync Gradle:
+<details>
+<summary>Integration using Dependency</summary>
+
+In order to integrate Appstock SDK into your application, you should add the following dependency to the `app/build.gradle` file and sync Gradle:
 
 ```groovy
 dependencies {
     implementation("com.appstock:appstock-sdk:1.0.0")
 }
-```
 
 Add this custom maven repository URL into the `project/settings.gradle` file:
 
