@@ -25,8 +25,10 @@ Appstock SDK supports the following ad formats:
 
 The SDK can be integrated directly into your app or via supported Mediation Adapters:
 
-- [AppLovin MAX](9-sdk-android-applovin)
-- [GMA SDK](8-sdk-android-admob) (AdMob, GAM)
+- [AppLovin MAX](https://github.com/AppstockLTD/Appstock-Android-SDK/blob/main/MEDIATION.md)
+- [GMA SDK](https://github.com/AppstockLTD/Appstock-Android-SDK/blob/main/MEDIATION.md) (AdMob, GAM)
+- [TopOn](https://github.com/AppstockLTD/Appstock-Android-SDK/blob/main/MEDIATION.md) (AdMob, GAM)
+- [IronSource / LevelPlay](https://github.com/AppstockLTD/Appstock-Android-SDK/blob/main/MEDIATION.md) (AdMob, GAM)
 
 <details>
 <summary># Appstock Android SDK - Integration
