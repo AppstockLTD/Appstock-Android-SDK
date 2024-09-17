@@ -590,4 +590,4 @@ To create the Appstock SDK network, follow the instructions:
 8. Click **Save**. 
 
 After setting up the SDK network it the Appstock adapters will be automatically applied in the application using reflection. 
-<details>
+</details>
