@@ -13,8 +13,8 @@ The minimum supported Android version: **Android 5.0** (API level **21**)
 ## Integration and configuration
 
 Follow the [integration instructions](sdk-android-integration.md) to add the SDK to your app. Once the SDK is
-integrated, you can provide [configuration options](6-sdk-android-parametrisation) that will help increase your
-revenue. Keep in mind that the SDK supports basic [consent providers](7-sdk-android-consents) according to industry
+integrated, you can provide [configuration options](sdk-android-parametrisation) that will help increase your
+revenue. Keep in mind that the SDK supports basic [consent providers](sdk-android-consents) according to industry
 standards.
 
 Appstock SDK supports the following ad formats:
@@ -25,8 +25,8 @@ Appstock SDK supports the following ad formats:
 
 The SDK can be integrated directly into your app or via supported Mediation Adapters:
 
-- [AppLovin MAX](9-sdk-android-applovin)
-- [GMA SDK](8-sdk-android-admob) (AdMob, GAM)
+- [AppLovin MAX](sdk-android-applovin)
+- [GMA SDK](sdk-android-admob) (AdMob, GAM)
 
 # Appstock Android SDK - Integration
 
@@ -135,7 +135,7 @@ The `Appstock.initializeSdk()` method has two parameters:
 - **partnerKey** - determine the Appstock server URL. The Appstock account manager should provide you with this key.
 
 It is recommended that contextual information be provided after initialization to enrich the ad requests. For this
-purpose, use [SDK parametrization properties](6-sdk-android-parametrisation).
+purpose, use [SDK parametrization properties](sdk-android-parametrisation).
 
 Once SDK is initialized and all needed parameters are provided, it is ready to request the ads.
 
@@ -327,7 +327,7 @@ private static AppstockAdViewListener createListener() {
 }
 ```
 
-Once the ad is loaded you can utilize it's basic properties inspecting [AdInfo](6-sdk-android-utils.md) structure.
+Once the ad is loaded you can utilize it's basic properties inspecting [AdInfo](sdk-android-utils.md) structure.
 
 Or you can subscribe to the video ad events (only for video ad unit format).
 
@@ -558,7 +558,7 @@ private static AppstockInterstitialAdUnitListener createListener() {
 }
 ```
 
-Once the ad is loaded you can utilize it's basic properties inspecting [AdInfo](6-sdk-android-utils.md) structure.
+Once the ad is loaded you can utilize it's basic properties inspecting [AdInfo](sdk-android-utils.md) structure.
 
 ### Rendering Controls
 
@@ -787,7 +787,7 @@ private static AppstockRewardedAdUnitListener createListener() {
 }
 ```
 
-Once the ad is loaded you can utilize it's basic properties inspecting [AdInfo](6-sdk-android-utils.md) structure.
+Once the ad is loaded you can utilize it's basic properties inspecting [AdInfo](sdk-android-utils.md) structure.
 
 `onReward` method allows to process user's reward. Additionally, publishers can set up the `ext` JSON value which can contain more info about reward. 
 
@@ -1033,7 +1033,7 @@ private AppstockNativeAdConfig createNativeConfig() {
 }
 ```
 
-Once the ad is loaded you can utilize it's basic properties inspecting [AppstockNativeAd.adInfo](6-sdk-android-utils.md)
+Once the ad is loaded you can utilize it's basic properties inspecting [AppstockNativeAd.adInfo](sdk-android-utils.md)
 structure.
 
 ## AppstockNativeAdConfig
