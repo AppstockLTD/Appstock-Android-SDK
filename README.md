@@ -19,7 +19,7 @@ standards.
 
 Appstock SDK supports the following ad formats:
 
-- [Banner](sdk-android-banner.md) (HTML + Video)
+- [Banner](../sdk-android-banner.md) (HTML + Video)
 - [Interstitial](sdk-android-interstitial.md) (HTML + Video)
 - [Native](sdk-android-native.md)
 
