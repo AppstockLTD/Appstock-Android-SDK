@@ -13,8 +13,8 @@ The minimum supported Android version: **Android 5.0** (API level **21**)
 ## Integration and configuration
 
 Follow the [integration instructions](sdk-android-integration.md) to add the SDK to your app. Once the SDK is
-integrated, you can provide [configuration options](sdk-android-parametrisation) that will help increase your
-revenue. Keep in mind that the SDK supports basic [consent providers](sdk-android-consents) according to industry
+integrated, you can provide [configuration options](sdk-android-parametrisation.md) that will help increase your
+revenue. Keep in mind that the SDK supports basic [consent providers](sdk-android-consents.md) according to industry
 standards.
 
 Appstock SDK supports the following ad formats:
@@ -25,8 +25,8 @@ Appstock SDK supports the following ad formats:
 
 The SDK can be integrated directly into your app or via supported Mediation Adapters:
 
-- [AppLovin MAX](sdk-android-applovin)
-- [GMA SDK](sdk-android-admob) (AdMob, GAM)
+- [AppLovin MAX](sdk-android-applovin.md)
+- [GMA SDK](sdk-android-admob.md) (AdMob, GAM)
 
 # Appstock Android SDK - Integration
 
@@ -135,7 +135,7 @@ The `Appstock.initializeSdk()` method has two parameters:
 - **partnerKey** - determine the Appstock server URL. The Appstock account manager should provide you with this key.
 
 It is recommended that contextual information be provided after initialization to enrich the ad requests. For this
-purpose, use [SDK parametrization properties](sdk-android-parametrisation).
+purpose, use [SDK parametrization properties](sdk-android-parametrisation.md).
 
 Once SDK is initialized and all needed parameters are provided, it is ready to request the ads.
 
